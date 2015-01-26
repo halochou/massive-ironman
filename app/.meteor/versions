@@ -9,6 +9,7 @@ blaze-tools@1.0.2
 boilerplate-generator@1.0.2
 callback-hook@1.0.2
 check@1.0.4
+coffeescript@1.0.5
 ddp@1.0.14
 deps@1.0.6
 ejson@1.0.5
@@ -59,6 +60,7 @@ routepolicy@1.0.4
 service-configuration@1.0.3
 session@1.0.5
 sha@1.0.2
+softwarerero:accounts-t9n@1.0.6
 spacebars@1.0.5
 spacebars-compiler@1.0.4
 spiderable@1.0.6

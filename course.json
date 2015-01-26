@@ -357,12 +357,9 @@
                                         "find_one": true
                                     },
                                     "fields": [
-                                        { "name": "profile.name", "title": "Name", "required": true },
+                                        { "name": "profile.name", "title": "学号", "required": true },
                                         { "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
-                                        { "name": "profile.facebook", "title": "Facebook URL" },
-                                        { "name": "profile.google", "title": "Google+ URL" },
-                                        { "name": "profile.twitter", "title": "Twitter ID" },
-                                        { "name": "profile.website", "title": "Website URL" }
+                                        { "name": "profile.realname", "title": "姓名", "required": false },
                                     ]
                                 }
                             ]
