@@ -1,0 +1,418 @@
+{
+    "application": {
+        "title": "BUAA-EE 选课系统",
+        "meta_title": "Course Picker",
+        "meta_description": "Course Picker for BUAA eeLab",
+        "theme": "bootswatch-paper",
+
+        "roles": [ "admin", "user", "tutor" ],
+        "default_role": "user",
+
+        "collections": [
+            {
+                "name": "courses",
+                "fields": [
+                    { "name": "name", "title": "名称", "required": true, "exportable": true },
+                    { "name": "tutor", "title": "教师", "default": "-", "exportable": true },
+                    {
+                        "name": "date",
+                        "title": "上课时间",
+                        "type": "date",
+                        "format": "YYYY-MM-DD",
+                        "input": "datepicker",
+                        "default": "today",
+                        "required": true,
+                        "exportable": true,
+                        "searchable": true,
+                        "sortable": true,
+                        "input_template": "text",
+                        "input_group_class": "text",
+                        "input_items": [],
+                        "show_in_dataview": true,
+                        "show_in_insert_form": true,
+                        "show_in_update_form": true,
+                        "show_in_read_only_form": true
+                    },
+                    {
+                        "name": "avail",
+                        "title": "已选",
+                        "type": "integer",
+                        "exportable": false,
+                        "show_in_dataview": true,
+                        "show_in_insert_form": false,
+                        "show_in_update_form": false,
+                        "show_in_read_only_form": true
+                    },
+                    { "name": "amount", "title": "上限", "type": "integer", "exportable": true },
+                    { "name": "desc", "title": "课程简介", "input": "textarea", "exportable": false, "show_in_dataview": false },
+
+                    {
+                        "name": "members",
+                        "title": "成员",
+                        "type": "array",
+                        "required": false,
+                        "exportable": true,
+                        "input": "read-only",
+                        "input_template": "text",
+                        "input_group_class": "text",
+                        "array_item_type": "string",
+                        "show_in_dataview": false,
+                        "show_in_insert_form": false,
+                        "show_in_update_form": false,
+                        "show_in_read_only_form": false,
+                        "input_items": []
+                    }
+                ]
+            }
+        ],
+
+        "public_zone": {
+            "pages": [
+                {
+                    "name": "home_public",
+                    "title": "",
+                    "components": [
+                        {
+                            "name": "home_jumbotron",
+                            "title": "Example application",
+                            "type": "jumbotron",
+                            "text": "<b>This is example application built with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> code generator without manual coding.</b><br />It demonstrates simple application with user account system and admin panel.<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-admin\" target=\"_blank\">here</a>.",
+                            "button_title": "Continue &raquo;",
+                            "button_route": "login"
+                        }
+                    ]
+                },
+
+                { "name": "login", "template": "login.html" },
+                { "name": "register", "template": "register.html" },
+                { "name": "forgot_password", "template": "forgot_password.html" },
+                { "name": "reset_password", "template": "reset_password.html", "route_params": ["resetPasswordToken"] }
+            ],
+
+            "menus": [
+                {
+                    "name": "left_menu",
+                    "class": "nav navbar-nav",
+                    "dest_selector": "#menu",
+                    "items": [
+                        { "title": "首页", "route": "home_public" }
+                    ]
+                },
+
+                {
+                    "name": "right_menu",
+                    "class": "nav navbar-nav navbar-right",
+                    "dest_selector": "#menu",
+                    "items": [
+                        { "title": "注册", "route": "register" },
+                        { "title": "登录", "route": "login" }
+                    ]
+                }
+            ]
+        },
+
+        "private_zone": {
+            "pages": [
+                { "name": "home_private", "title": "Welcome {{userFullName}}!" },
+                {
+                    "name": "courses",
+                    "roles": ["admin","tutor","user"],
+                    "components": [
+                        {
+                            "name": "view",
+                            "type": "dataview",
+                            "title": "课程",
+                            "text_if_empty": "No courses :(",
+                            "query": {
+                                "name": "courses",
+                                "collection": "courses",
+                                "filter": {}
+                            },
+                            "insert_route": "courses.insert",
+                            "edit_route": "courses.edit",
+                            "edit_route_params": [
+                                { "name": "courseId", "value": "this._id" }
+                            ],
+                            "details_route": "courses.details",
+                            "details_route_params": [
+                                { "name": "courseId", "value": "this._id" }
+                            ]
+                        }
+                    ],
+                    "pages": [
+                        {
+                            "name": "insert",
+                            "components": [
+                                {
+                                    "name": "insert_form",
+                                    "type": "form",
+                                    "mode": "insert",
+                                    "title": "新建课程",
+                                    "query": {
+                                        "name": "courses_empty",
+                                        "collection": "courses",
+                                        "filter": {"_id": null}
+                                    },
+                                    "submit_route": "courses",
+                                    "cancel_route": "courses"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "details",
+                            "route_params": ["courseId"],
+                            "components": [
+                                {
+                                    "name": "details_form",
+                                    "type": "form",
+                                    "mode": "read_only",
+                                    "title": "详情",
+                                    "layout": "horizontal",
+                                    "query": {
+                                        "name": "course",
+                                        "collection": "courses",
+                                        "filter": { "_id": ":courseId" }
+                                    },
+                                    "close_route": "courses",
+                                    "back_route": "courses"
+                                }
+                            ]
+                        },
+
+                        {
+                            "name": "edit",
+                            "route_params": ["courseId"],
+                            "components": [
+                                {
+                                    "name": "edit_form",
+                                    "type": "form",
+                                    "mode": "update",
+                                    "title": "编辑课程",
+                                    "submit_route": "courses",
+                                    "cancel_route": "courses",
+                                    "query": {
+                                        "name": "course",
+                                        "collection": "courses",
+                                        "filter": { "_id": ":courseId" }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    "name": "admin",
+                    "roles": ["admin"],
+                    "pages": [
+                        {
+                            "name": "users",
+                            "components": [
+                                {
+                                    "name": "view",
+                                    "type": "dataview",
+                                    "title": "用户",
+                                    "text_if_empty": "No users yet",
+                                    "query": {
+                                        "name": "admin_users",
+                                        "collection": "users",
+                                        "filter": {},
+                                        "options": { "sort": { "\"profile.name\"": 1 } }
+                                    },
+
+                                    "fields": [
+                                        { "name": "profile.name", "title": "姓名"},
+                                        { "name": "profile.email", "title": "E-mail" },
+                                        { "name": "roles", "title": "Role" }
+                                    ],
+
+                                    "insert_route": "admin.users.insert",
+
+                                    "edit_route": "admin.users.edit",
+                                    "edit_route_params": [
+                                        { "name": "userId", "value": "this._id" }
+                                    ],
+
+                                    "details_route": "admin.users.details",
+                                    "details_route_params": [
+                                        { "name": "userId", "value": "this._id" }
+                                    ]
+                                }
+                            ],
+                            "pages": [
+                                {
+                                    "name": "details",
+                                    "route_params": ["userId"],
+                                    "components": [
+                                        {
+                                            "name": "details_form",
+                                            "type": "form",
+                                            "mode": "read_only",
+                                            "title": "用户详情",
+                                            "query": {
+                                                "name": "admin_user",
+                                                "collection": "users",
+                                                "filter": { "_id": ":userId" }
+                                            },
+                                            "fields": [
+                                                { "name": "profile.name", "title": "姓名"},
+                                                { "name": "profile.email", "title": "E-mail", "type": "email" },
+                                                { "name": "roles", "title": "Role" }
+                                            ],
+                                            "close_route": "admin.users",
+                                            "back_route": "admin.users"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "insert",
+                                    "components": [
+                                        {
+                                            "name": "insert_form",
+                                            "type": "form",
+                                            "mode": "insert",
+                                            "title": "添加新用户",
+                                            "submit_route": "admin.users",
+                                            "cancel_route": "admin.users",
+                                            "query": {
+                                                "name": "users_null",
+                                                "collection": "users",
+                                                "filter": { "_id": null }
+                                            },
+                                            "fields": [
+                                                { "name": "profile.name", "title": "姓名", "required": true },
+                                                { "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+                                                { "name": "password", "title": "密码", "input": "password", "required": true }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "edit",
+                                    "route_params": ["userId"],
+                                    "components": [
+                                        {
+                                            "name": "edit_form",
+                                            "type": "form",
+                                            "mode": "update",
+                                            "title": "编辑用户",
+                                            "submit_route": "admin.users",
+                                            "cancel_route": "admin.users",
+                                            "query": {
+                                                "name": "admin_user",
+                                                "collection": "users",
+                                                "filter": { "_id": ":userId" }
+                                            },
+                                            "fields": [
+                                                { "name": "profile.name", "title": "姓名", "required": true },
+                                                { "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+                                                {
+                                                    "name": "roles",
+                                                    "type": "array",
+                                                    "title": "Role",
+                                                    "input": "radio",
+                                                    "input_items": [
+                                                        { "value": "user", "title": "学生" },
+                                                        { "value": "tutor", "title": "教师" },
+                                                        { "value": "admin", "title": "管理员" }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+
+                    ],
+
+                    "menus": [
+                        {
+                            "name": "side_menu",
+                            "class": "nav nav-stacked nav-pills",
+                            "items": [
+                                { "title": "用户", "route": "admin.users" }
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    "name": "user_settings",
+                    "roles": ["user", "admin"],
+                    "pages": [
+                        {
+                            "name": "profile",
+                            "components": [
+                                {
+                                    "name": "edit_form",
+                                    "type": "form",
+                                    "mode": "update",
+                                    "title": "编辑概要文件",
+                                    "submit_route": "user_settings.profile",
+                                    "query": {
+                                        "name": "current_user_data",
+                                        "collection": "users",
+                                        "filter": { "_id": "Meteor.userId()" },
+                                        "find_one": true
+                                    },
+                                    "fields": [
+                                        { "name": "profile.name", "title": "Name", "required": true },
+                                        { "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+                                        { "name": "profile.facebook", "title": "Facebook URL" },
+                                        { "name": "profile.google", "title": "Google+ URL" },
+                                        { "name": "profile.twitter", "title": "Twitter ID" },
+                                        { "name": "profile.website", "title": "Website URL" }
+                                    ]
+                                }
+                            ]
+                        },
+
+                        { "name": "change_pass", "template": "change_pass.html" }
+                    ],
+
+                    "menus": [
+                        {
+                            "name": "side_menu",
+                            "class": "nav nav-stacked nav-pills",
+                            "items": [
+                                { "title": "概要文件", "route": "user_settings.profile" },
+                                { "title": "修改密码", "route": "user_settings.change_pass" }
+                            ]
+                        }
+                    ]
+                },
+
+                { "name": "logout", "template": "logout.html", "action_code": "App.logout();" }
+            ],
+
+            "menus": [
+                {
+                    "name": "left_menu",
+                    "class": "nav navbar-nav",
+                    "dest_selector": "#menu",
+                    "items": [
+                        { "title": "首页", "route": "home_private" },
+                        { "title": "课程", "route": "courses" }
+                    ]
+                },
+                {
+                    "name": "right_menu",
+                    "class": "nav navbar-nav navbar-right",
+                    "dest_selector": "#menu",
+                    "items": [
+                        { "title": "管理后台", "route": "admin" },
+
+                        {
+                            "title": "{{userEmail}}",
+                            "items": [
+                                { "title": "设置", "route": "user_settings" },
+                                { "title": "注销", "route": "logout" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
