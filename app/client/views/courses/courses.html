@@ -16,6 +16,8 @@
 			课程
 		</h2>
 		<form id="dataview-controls" class="form-inline">
+			{{#if isUser}}
+			{{else}}
 			<div id="dataview-controls-insert" class="form-group">
 				<button type="submit" id="dataview-insert-button" class="btn btn-success">
 					<span class="fa fa-plus">
@@ -23,6 +25,7 @@
 					Add new
 				</button>
 			</div>
+			{{/if}}
 			<div id="dataview-controls-search">
 				{{#if isNotEmpty}}
 				<div id="dataview-controls-search-group" class="form-group">
@@ -39,9 +42,12 @@
 			</div>
 			<div id="dataview-controls-export" class="form-group">
 				{{#if isNotEmpty}}
-		{{#if isFound}}
+				{{#if isFound}}
 				<div>
 				</div>
+				{{else}}
+
+				{{#if isUser}}
 				{{else}}
 				<div class="btn-group">
 					<button type="button" class="btn btn-default" id="dataview-export-default">
@@ -69,6 +75,7 @@
 						</li>
 					</ul>
 				</div>
+				{{/if}}
 				{{/if}}
 	{{/if}}
 			</div>
@@ -143,11 +150,20 @@
 		</td>
 		{{#if isUser}}
 			<td>
-				{{status _id}}
+				{{#if status _id}}
+				已选
+				{{else}}
+				未选
+				{{/if}}
 			</td>
 			<td class="td-icon">
-				<span id="enroll-button" class="fa fa-bolt" title="Enroll">
+				{{#if status _id}}
+				<span id="unenroll-button" class="fa fa-trash" title="退选">
 				</span>
+				{{else}}
+				<span id="enroll-button" class="fa fa-bolt" title="选课">
+				</span>
+				{{/if}}
 			</td>
 		{{else}}
 			<td class="td-icon">

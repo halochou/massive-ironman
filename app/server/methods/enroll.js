@@ -31,25 +31,13 @@ Meteor.methods({
         var course = Courses.findOne({_id:courseId});
 
         if (!course.members) {
-            res = Courses.update(
-                {_id: courseId},
-                {$set: {avail: 1, members: [username]}}
-            );
             return "success";
         } else {
-            var currentCount = course.members.length;
-            if (_.contains(course.members,username)){
-                return "success";
-            } else if (currentCount >= course.amount) {
-                return "full";
-            } else {
-                res = Courses.update(
-                    {_id: courseId},
-                    {$set: {avail: currentCount + 1}},
-                    {$push: {members: username}}
-                );
-                return "success"
-            }
+            res = Courses.update(
+                {_id: courseId},
+                {$pull: {members: username}}
+            );
+            return "success"
         }
     }
 });

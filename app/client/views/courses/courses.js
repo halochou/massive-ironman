@@ -188,9 +188,11 @@ Template.CoursesView.helpers({
 	},
 	"viewAsGallery": function() {
 		return pageSession.get("CoursesViewStyle") == "gallery";
+	},
+	"isUser": function () {
+		var currentUser = Meteor.user();
+		return _.contains(currentUser.roles, 'user');
 	}
-
-
 });
 
 
@@ -287,6 +289,32 @@ Template.CoursesViewTableItems.events({
 		});
 		return false;
 	},
+	"click #unenroll-button": function(e, t) {
+		e.preventDefault();
+		courseId = this._id;
+		Meteor.call('unenrollToCourse', courseId, function(error, result) {
+			if(error){
+				console.log("network error");
+				Session.set('enrollMessage','error');
+			} else {
+				switch(result){
+					case 'full':
+						console.log("FULL");
+						Session.set('enrollMessage','full');
+						break;
+						case 'success':
+							console.log("SUCCESS");
+							Session.set('enrollMessage','success');
+							break;
+							case 'error':
+								console.log("ERROR");
+								Session.set('enrollMessage','error');
+								break;
+							}
+						}
+					});
+					return false;
+				},
 });
 
 Template.CoursesViewTableItems.helpers({
@@ -296,10 +324,6 @@ Template.CoursesViewTableItems.helpers({
 	},
 	"status": function(courseId) {
 		var course = Courses.findOne({_id:courseId});
-
-		//console.log(course);
-		// Meteor.user().profile.name);
-		//return Meteor.userId();
-		return _.contains(course.members, Meteor.user().profile.name) ? '已选' : '未选';
+		return _.contains(course.members, Meteor.user().profile.name);
 	},
 });

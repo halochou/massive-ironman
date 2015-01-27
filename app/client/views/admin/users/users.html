@@ -38,7 +38,7 @@
 				{{/if}}
 			</div>
 		</form>
-		{{#if isNotEmpty}}	
+		{{#if isNotEmpty}}
 			{{#if isNotFound}}
 		<div class="alert alert-warning">
 			"{{searchString}}" not found.
@@ -47,7 +47,7 @@
 		<div id="dataview-data">
 			{{#if viewAsTable}} {{> AdminUsersViewTable}} {{/if}}
 		</div>
-		{{/if}}	
+		{{/if}}
 		{{else}}
 		<div class="alert alert-info">
 			No users yet
@@ -92,9 +92,8 @@
 			{{roles}}
 		</td>
 		<td class="td-icon">
-			<span id="edit-button" class="fa fa-pencil" title="Edit">
+			<span id="edit-button" class="fa fa-pencil" title="Edit">Edit
 			</span>
 		</td>
 	</tr>
 </template>
-
