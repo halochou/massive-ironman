@@ -13,17 +13,17 @@ if(Meteor.isClient) {
 
 	var roleMap = [
 		{ route: "courses", roles: ["admin","tutor","user"] },
-		{ route: "courses.insert", roles: ["admin","tutor","user"] },
+		{ route: "courses.insert", roles: ["admin","tutor"] },
 		{ route: "courses.details", roles: ["admin","tutor","user"] },
-		{ route: "courses.edit", roles: ["admin","tutor","user"] },
+		{ route: "courses.edit", roles: ["admin","tutor"] },
 		{ route: "admin", roles: ["admin"] },
 		{ route: "admin.users", roles: ["admin"] },
 		{ route: "admin.users.details", roles: ["admin"] },
 		{ route: "admin.users.insert", roles: ["admin"] },
 		{ route: "admin.users.edit", roles: ["admin"] },
-		{ route: "user_settings", roles: ["user","admin"] },
-		{ route: "user_settings.profile", roles: ["user","admin"] },
-		{ route: "user_settings.change_pass", roles: ["user","admin"] }
+		{ route: "user_settings", roles: ["user","tutor","admin"] },
+		{ route: "user_settings.profile", roles: ["user","tutor","admin"] },
+		{ route: "user_settings.change_pass", roles: ["user","tutor","admin"] }
 	];
 
 	this.firstGrantedRoute = function() {
@@ -38,7 +38,7 @@ if(Meteor.isClient) {
 
 		if(grantedRoute == "") {
 			if(routeGranted("home_private")) {
-				return "home_private";				
+				return "home_private";
 			} else {
 				return "home_public";
 			}
@@ -79,7 +79,7 @@ if(Meteor.isClient) {
 
 		return true;
 	};
-	
+
 	Meteor.subscribe("current_user_data");
 
 	Router.ensureLogged = function() {
@@ -93,7 +93,7 @@ if(Meteor.isClient) {
 				// user is not in allowedRoles - redirect to private home
 				var redirectRoute = firstGrantedRoute();
 				this.redirect(redirectRoute);
-				return;				
+				return;
 			}
 			this.next();
 		}
@@ -123,7 +123,7 @@ if(Meteor.isClient) {
 }
 
 Router.map(function () {
-	
+
 	this.route("home_public", {path: "/", controller: "HomePublicController"});
 	this.route("login", {path: "/login", controller: "LoginController"});
 	this.route("register", {path: "/register", controller: "RegisterController"});

@@ -38,7 +38,7 @@
 				{{/if}}
 			</div>
 			<div id="dataview-controls-export" class="form-group">
-				{{#if isNotEmpty}}			
+				{{#if isNotEmpty}}
 		{{#if isFound}}
 				<div>
 				</div>
@@ -69,11 +69,11 @@
 						</li>
 					</ul>
 				</div>
-				{{/if}}			
+				{{/if}}
 	{{/if}}
 			</div>
 		</form>
-		{{#if isNotEmpty}}	
+		{{#if isNotEmpty}}
 			{{#if isNotFound}}
 		<div class="alert alert-warning">
 			"{{searchString}}" not found.
@@ -82,7 +82,7 @@
 		<div id="dataview-data">
 			{{#if viewAsTable}} {{> CoursesViewTable}} {{/if}}
 		</div>
-		{{/if}}	
+		{{/if}}
 		{{else}}
 		<div class="alert alert-info">
 			No courses :(
@@ -141,14 +141,23 @@
 		<td>
 			{{amount}}
 		</td>
-		<td class="td-icon">
-			<span id="edit-button" class="fa fa-pencil" title="Edit">
-			</span>
-		</td>
-		<td class="td-icon">
-			<span id="delete-button" class="fa fa-trash-o" title="Delete">
-			</span>
-		</td>
+		{{#if isUser}}
+			<td>
+				{{status _id}}
+			</td>
+			<td class="td-icon">
+				<span id="enroll-button" class="fa fa-bolt" title="Enroll">
+				</span>
+			</td>
+		{{else}}
+			<td class="td-icon">
+				<span id="edit-button" class="fa fa-pencil" title="Edit">
+				</span>
+			</td>
+			<td class="td-icon">
+				<span id="delete-button" class="fa fa-trash-o" title="Delete">
+				</span>
+			</td>
+		{{/if}}
 	</tr>
 </template>
-

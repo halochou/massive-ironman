@@ -1,7 +1,7 @@
 var pageSession = new ReactiveDict();
 
 Template.Courses.rendered = function() {
-	
+
 };
 
 Template.Courses.events({
@@ -14,11 +14,11 @@ Template.Courses.events({
 		Router.go("", {});
 	}
 
-	
+
 });
 
 Template.Courses.helpers({
-	
+
 });
 
 var CoursesViewItems = function(cursor) {
@@ -82,7 +82,7 @@ var CoursesViewExport = function(cursor, fileType) {
 
 Template.CoursesView.rendered = function() {
 	pageSession.set("CoursesViewStyle", "table");
-	
+
 };
 
 Template.CoursesView.events({
@@ -164,7 +164,7 @@ Template.CoursesView.events({
 		CoursesViewExport(this.courses, "json");
 	}
 
-	
+
 });
 
 Template.CoursesView.helpers({
@@ -190,12 +190,12 @@ Template.CoursesView.helpers({
 		return pageSession.get("CoursesViewStyle") == "gallery";
 	}
 
-	
+
 });
 
 
 Template.CoursesViewTable.rendered = function() {
-	
+
 };
 
 Template.CoursesViewTable.events({
@@ -222,7 +222,7 @@ Template.CoursesViewTable.helpers({
 
 
 Template.CoursesViewTableItems.rendered = function() {
-	
+
 };
 
 Template.CoursesViewTableItems.events({
@@ -259,9 +259,47 @@ Template.CoursesViewTableItems.events({
 		e.preventDefault();
 		Router.go("courses.edit", {courseId: this._id});
 		return false;
-	}
+	},
+
+	"click #enroll-button": function(e, t) {
+		e.preventDefault();
+		courseId = this._id;
+		Meteor.call('enrollToCourse', courseId, function(error, result) {
+			if(error){
+				console.log("network error");
+				Session.set('enrollMessage','error');
+			} else {
+				switch(result){
+					case 'full':
+						console.log("FULL");
+						Session.set('enrollMessage','full');
+						break;
+					case 'success':
+						console.log("SUCCESS");
+						Session.set('enrollMessage','success');
+						break;
+					case 'error':
+						console.log("ERROR");
+						Session.set('enrollMessage','error');
+						break;
+				}
+			}
+		});
+		return false;
+	},
 });
 
 Template.CoursesViewTableItems.helpers({
+	"isUser": function () {
+		var currentUser = Meteor.user();
+		return _.contains(currentUser.roles, 'user');
+	},
+	"status": function(courseId) {
+		var course = Courses.findOne({_id:courseId});
 
+		//console.log(course);
+		// Meteor.user().profile.name);
+		//return Meteor.userId();
+		return _.contains(course.members, Meteor.user().profile.name) ? '已选' : '未选';
+	},
 });

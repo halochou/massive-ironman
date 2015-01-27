@@ -339,7 +339,7 @@
 
                 {
                     "name": "user_settings",
-                    "roles": ["user", "admin"],
+                    "roles": ["user","tutor","admin"],
                     "pages": [
                         {
                             "name": "profile",
