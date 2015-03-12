@@ -10,7 +10,6 @@ less
 accounts-base
 spiderable
 iron:router
-natestrauser:font-awesome
 matb33:collection-hooks
 perak:user-roles
 reactive-dict
@@ -19,3 +18,4 @@ mizzao:bootboxjs
 mrt:moment
 rajit:bootstrap3-datepicker
 softwarerero:accounts-t9n
+fortawesome:fontawesome
