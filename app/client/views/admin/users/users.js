@@ -1,7 +1,7 @@
 var pageSession = new ReactiveDict();
 
 Template.AdminUsers.rendered = function() {
-	
+
 };
 
 Template.AdminUsers.events({
@@ -14,11 +14,11 @@ Template.AdminUsers.events({
 		Router.go("", {});
 	}
 
-	
+
 });
 
 Template.AdminUsers.helpers({
-	
+
 });
 
 var AdminUsersViewItems = function(cursor) {
@@ -82,7 +82,7 @@ var AdminUsersViewExport = function(cursor, fileType) {
 
 Template.AdminUsersView.rendered = function() {
 	pageSession.set("AdminUsersViewStyle", "table");
-	
+
 };
 
 Template.AdminUsersView.events({
@@ -164,7 +164,7 @@ Template.AdminUsersView.events({
 		AdminUsersViewExport(this.admin_users, "json");
 	}
 
-	
+
 });
 
 Template.AdminUsersView.helpers({
@@ -190,12 +190,12 @@ Template.AdminUsersView.helpers({
 		return pageSession.get("AdminUsersViewStyle") == "gallery";
 	}
 
-	
+
 });
 
 
 Template.AdminUsersViewTable.rendered = function() {
-	
+
 };
 
 Template.AdminUsersViewTable.events({
@@ -222,7 +222,7 @@ Template.AdminUsersViewTable.helpers({
 
 
 Template.AdminUsersViewTableItems.rendered = function() {
-	
+
 };
 
 Template.AdminUsersViewTableItems.events({
@@ -263,5 +263,4 @@ Template.AdminUsersViewTableItems.events({
 });
 
 Template.AdminUsersViewTableItems.helpers({
-
 });

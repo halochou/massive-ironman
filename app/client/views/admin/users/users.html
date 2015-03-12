@@ -20,7 +20,7 @@
 				<button type="submit" id="dataview-insert-button" class="btn btn-success">
 					<span class="fa fa-plus">
 					</span>
-					Add new
+					新建用户
 				</button>
 			</div>
 			<div id="dataview-controls-search">
@@ -29,7 +29,7 @@
 					<label class="sr-only" for="search">
 						Search
 					</label>
-					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="搜索" name="search" value="{{searchString}}" autofocus="autofocus">
 					<button type="button" id="dataview-search-button" class="btn btn-primary">
 						<span class="fa fa-search">
 						</span>
@@ -63,11 +63,11 @@
 				<th class="th-sortable" data-sort="profile.name">
 					姓名
 				</th>
-				<th class="th-sortable" data-sort="profile.email">
-					E-mail
-				</th>
+<!-- 				<th class="th-sortable" data-sort="profile.email">
+	E-mail
+</th> -->
 				<th class="th-sortable" data-sort="roles">
-					Role
+					身份
 				</th>
 				<th>
 					&nbsp;
@@ -85,14 +85,14 @@
 		<td>
 			{{profile.name}}
 		</td>
-		<td>
-			{{profile.email}}
-		</td>
+<!-- 		<td>
+	{{profile.email}}
+</td> -->
 		<td>
 			{{roles}}
 		</td>
-		<td class="td-icon">
-			<span id="edit-button" class="fa fa-pencil" title="Edit">Edit
+		<td>
+			<span id="edit-button" class="fa fa-pencil" title="Edit">编辑
 			</span>
 		</td>
 	</tr>

@@ -11,20 +11,20 @@
 			{{/if}}
 			<!-- <input id="login_email" type="text" class="form-control" placeholder="Email address" required autofocus> -->
 			<input id="login_username" type="text" class="form-control" placeholder="用户名" required autofocus>
-			<input id="login_password" type="password" class="form-control" placeholder="Password" required>
-			<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="Please wait...">
-				Sign in
+			<input id="login_password" type="password" class="form-control" placeholder="密码" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" data-loading-text="登录中...">
+				登录
 			</button>
 			<p class="account-form-text-after" id="register-link">
-				Not a member?
+				没有账户？
 				<a href="{{pathFor 'register'}}">
-					Sign up here
+					点击这里注册
 				</a>
 			</p>
 			<p class="account-form-text-after" id="forgot-password-link">
-				Forgot password?
+				忘记密码？
 				<a href="{{pathFor 'forgot_password'}}">
-					Click here
+					点击这里
 				</a>
 			</p>
 		</form>
