@@ -20,8 +20,8 @@
 			<div class="alert alert-warning">
 				{{errorMessage}}
 			</div>
-			{{/if}}		
-		
+			{{/if}}
+
 			{{#if infoMessage}}
 			<div class="alert alert-success">
 				{{infoMessage}}
@@ -39,18 +39,18 @@
 					</span>
 				</div>
 			</div>
-			<div class="form-group  field-profile-email">
-				<label for="profile.email">
-					E-mail
-				</label>
-				<div class="input-div">
-					<input type="text" name="profile.email" value="{{admin_user.profile.email}}" class="form-control" required="required" data-type="email">
-					<span id="help-text" class="help-block">
-					</span>
-					<span id="error-text" class="help-block">
-					</span>
-				</div>
-			</div>
+<!-- 			<div class="form-group  field-profile-email">
+	<label for="profile.email">
+		E-mail
+	</label>
+	<div class="input-div">
+		<input type="text" name="profile.email" value="{{admin_user.profile.email}}" class="form-control" required="required" data-type="email">
+		<span id="help-text" class="help-block">
+		</span>
+		<span id="error-text" class="help-block">
+		</span>
+	</div>
+</div> -->
 			<div class="form-group  field-roles">
 				<label for="roles">
 					Role
@@ -85,14 +85,13 @@
 					<button id="form-submit-button" class="btn btn-success" type="submit">
 						<span class="fa fa-check">
 						</span>
-						Save
+						保存
 					</button>
 					<a href="#" id="form-cancel-button" class="btn btn-default">
-						Cancel
+						取消
 					</a>
 				</div>
 			</div>
 		</form>
 	</div>
 </template>
-

@@ -143,7 +143,7 @@
 			{{formatDate date 'YYYY-MM-DD'}}
 		</td>
 		<td>
-			{{avail}}
+			{{currentEnrolled _id}}
 		</td>
 		<td>
 			{{amount}}
@@ -156,22 +156,26 @@
 				未选
 				{{/if}}
 			</td>
-			<td class="td-icon">
+			<td>
 				{{#if status _id}}
 				<span id="unenroll-button" class="fa fa-trash" title="退选">
+				退选
 				</span>
 				{{else}}
 				<span id="enroll-button" class="fa fa-bolt" title="选课">
+				选课
 				</span>
 				{{/if}}
 			</td>
 		{{else}}
-			<td class="td-icon">
-				<span id="edit-button" class="fa fa-pencil" title="Edit">
+			<td>
+				<span id="edit-button" class="fa fa-pencil" title="编辑">
+				编辑
 				</span>
 			</td>
-			<td class="td-icon">
-				<span id="delete-button" class="fa fa-trash-o" title="Delete">
+			<td>
+				<span id="delete-button" class="fa fa-trash-o" title="删除">
+				删除
 				</span>
 			</td>
 		{{/if}}

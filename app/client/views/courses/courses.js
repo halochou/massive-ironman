@@ -326,4 +326,12 @@ Template.CoursesViewTableItems.helpers({
 		var course = Courses.findOne({_id:courseId});
 		return _.contains(course.members, Meteor.user().profile.name);
 	},
+	"currentEnrolled": function(courseId) {
+		var course = Courses.findOne({_id:courseId});
+		if(course.members){
+			return course.members.length;
+		} else {
+			return 0;
+		}
+	}
 });

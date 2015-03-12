@@ -85,7 +85,7 @@ if(Meteor.isClient) {
 	Router.ensureLogged = function() {
 		if(!Meteor.user()) {
 			// user is not logged in - redirect to public home
-			this.redirect("home_public");
+			this.redirect("login");
 			return;
 		} else {
 			// user is logged in - check role
@@ -124,12 +124,12 @@ if(Meteor.isClient) {
 
 Router.map(function () {
 
-	this.route("home_public", {path: "/", controller: "HomePublicController"});
+	// this.route("home_public", {path: "/", controller: "HomePublicController"});
 	this.route("login", {path: "/login", controller: "LoginController"});
 	this.route("register", {path: "/register", controller: "RegisterController"});
 	this.route("forgot_password", {path: "/forgot_password", controller: "ForgotPasswordController"});
 	this.route("reset_password", {path: "/reset_password/:resetPasswordToken", controller: "ResetPasswordController"});
-	this.route("home_private", {path: "/home_private", controller: "HomePrivateController"});
+	// this.route("home_private", {path: "/home_private", controller: "HomePrivateController"});
 	this.route("courses", {path: "/courses", controller: "CoursesController"});
 	this.route("courses.insert", {path: "/courses/insert", controller: "CoursesInsertController"});
 	this.route("courses.details", {path: "/courses/details/:courseId", controller: "CoursesDetailsController"});
