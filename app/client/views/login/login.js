@@ -3,12 +3,12 @@ var pageSession = new ReactiveDict();
 pageSession.set("errorMessage", "");
 
 Template.Login.rendered = function() {
-	
+
 	$("input[autofocus]").focus();
 };
 
 Template.Login.created = function() {
-	pageSession.set("errorMessage", "");	
+	pageSession.set("errorMessage", "");
 };
 
 Template.Login.events({
@@ -17,27 +17,35 @@ Template.Login.events({
 
 		var submit_button = $(t.find(":submit"));
 
-		var login_email = t.find('#login_email').value.trim();
+		// var login_email = t.find('#login_email').value.trim();
+		var login_username = t.find('#login_username').value.trim();
 		var login_password = t.find('#login_password').value;
 
 		// check email
-		if(!isValidEmail(login_email))
+		// if(!isValidEmail(login_email))
+		// {
+		// 	pageSession.set("errorMessage", "Please enter your e-mail address.");
+		// 	t.find('#login_email').focus();
+		// 	return false;
+		// }
+
+		// check username
+		if(login_username == "")
 		{
-			pageSession.set("errorMessage", "Please enter your e-mail address.");
-			t.find('#login_email').focus();
+			pageSession.set("errorMessage", "Please enter your username.");
+			t.find('#login_username').focus();
 			return false;
 		}
-
 		// check password
 		if(login_password == "")
 		{
 			pageSession.set("errorMessage", "Please enter your password.");
-			t.find('#login_email').focus();
+			t.find('#login_username').focus();
 			return false;
 		}
 
 		submit_button.button("loading");
-		Meteor.loginWithPassword(login_email, login_password, function(err) {
+		Meteor.loginWithPassword(login_username, login_password, function(err) {
 			submit_button.button("reset");
 			if (err)
 			{
@@ -47,14 +55,14 @@ Template.Login.events({
 			else
 				pageSession.set("errorMessage", "");
 		});
-		return false; 
+		return false;
 	}
-	
+
 });
 
 Template.Login.helpers({
 	errorMessage: function() {
 		return pageSession.get("errorMessage");
 	}
-	
+
 });

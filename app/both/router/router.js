@@ -7,8 +7,8 @@ Router.configure({
 });
 
 if(Meteor.isClient) {
-	var publicRoutes = ["home_public", "login", "register", "forgot_password", "reset_password"];
-	var privateRoutes = ["home_private", "courses", "courses.insert", "courses.details", "courses.edit", "admin", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "logout"];
+	var publicRoutes = ["login", "register", "forgot_password", "reset_password", "home_public"];
+	var privateRoutes = ["courses", "home_private", "courses.insert", "courses.details", "courses.edit", "admin", "admin.users", "admin.users.details", "admin.users.insert", "admin.users.edit", "user_settings", "user_settings.profile", "user_settings.change_pass", "logout"];
 	var zonelessRoutes = [];
 
 	var roleMap = [
