@@ -67,7 +67,7 @@
 				</label>
 				<div class="input-div col-sm-9">
 					<p class="form-control-static">
-						{{course.avail}}
+						{{course.members.length}}
 					</p>
 				</div>
 			</div>
@@ -91,18 +91,22 @@
 					</p>
 				</div>
 			</div>
-<!-- 			<div class="form-group text field-members">
-	<label for="members" class="col-sm-3 control-label">
-		成员
-	</label>
-	<div class="input-div col-sm-9">
-		<p class="form-control-static">
-			{{#each course.members}}
-			{{this}}<br>
-			{{/each}}
-		</p>
-	</div>
-</div> -->
+			
+			{{#if isAdminOrTutor}}
+			<div class="form-group text field-members">
+				<label for="members" class="col-sm-3 control-label">
+					成员
+				</label>
+				<div class="input-div col-sm-9">
+					<p class="form-control-static">
+					{{#each course.members}}
+					{{this}}<br>
+					{{/each}}
+					</p>
+				</div>
+			</div>
+			{{/if}}
+
 			<div class="form-group">
 				<div class="submit-div col-sm-9 col-sm-offset-3">
 					<a href="#" id="form-close-button" class="btn btn-primary">

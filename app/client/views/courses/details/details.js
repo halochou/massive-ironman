@@ -114,6 +114,9 @@ Template.CoursesDetailsDetailsForm.helpers({
 	},
 	"errorMessage": function() {
 		return pageSession.get("coursesDetailsDetailsFormErrorMessage");
+	},
+	"isAdminOrTutor": function() {
+		var currentUser = Meteor.user();
+		return _.contains(currentUser.roles, 'tutor')||_.contains(currentUser.roles, 'admin');
 	}
-	
 });
