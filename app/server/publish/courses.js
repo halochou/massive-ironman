@@ -9,4 +9,3 @@ Meteor.publish("courses_empty", function() {
 Meteor.publish("course", function(courseId) {
 	return Courses.find({_id:courseId}, {});
 });
-

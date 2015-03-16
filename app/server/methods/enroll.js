@@ -1,6 +1,6 @@
 Meteor.methods({
     'enrollToCourse': function(courseId) {
-        var username = Meteor.users.findOne(this.userId).profile.name;
+        var username = Meteor.users.findOne(this.userId).username;
         var course = Courses.findOne({_id:courseId});
 
         if (!course.members) {
@@ -27,7 +27,7 @@ Meteor.methods({
         }
     },
     'unenrollToCourse': function(courseId) {
-        var username = Meteor.users.findOne(this.userId).profile.name;
+        var username = Meteor.users.findOne(this.userId).username;
         var course = Courses.findOne({_id:courseId});
 
         if (!course.members) {

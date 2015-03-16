@@ -18,6 +18,9 @@ Template.Register.events({
 		var submit_button = $(t.find(":submit"));
 
 		var register_name = t.find('#register_name').value.trim();
+
+		var register_givenname = t.find('#register_givenname').value.trim();
+
 		// var register_email = t.find('#register_email').value.trim();
 		var register_password = t.find('#register_password').value;
 
@@ -47,7 +50,12 @@ Template.Register.events({
 		}
 
 		submit_button.button("loading");
-		Accounts.createUser({username: register_name, /*email: register_email,*/ password : register_password, profile: { name: register_name }}, function(err) {
+		Accounts.createUser({
+			username: register_name,
+			/*email: register_email,*/ 
+			password : register_password,
+			profile: { name: register_givenname }},
+			function(err) {
 			submit_button.button("reset");
 			if(err)
 				pageSession.set("errorMessage", err.message);

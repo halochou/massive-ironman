@@ -118,5 +118,19 @@ Template.CoursesDetailsDetailsForm.helpers({
 	"isAdminOrTutor": function() {
 		var currentUser = Meteor.user();
 		return _.contains(currentUser.roles, 'tutor')||_.contains(currentUser.roles, 'admin');
+	},
+	"getGivennameByUsername": function(usernameInput) {
+		//return Users.find({username : usernameInput}).username;
+		//return Meteor.users.findOne({username : usernameInput});
+		// Meteor.users.findOne({'username': {$regex:usernameInput,$options:'i'}});
+        var givenname = Meteor.subscribe("allusers").findOne({username : usernameInput}).profile.name;
+		// var givenname = Users.findOne({_id:"wZMTKxzcvaedMaM3i"});
+		// var givenname = Users.findOne("wZMTKxzcvaedMaM3i");
+		if (givenname){
+			return givenname;
+		}
+		else {
+			return "error";
+		}
 	}
 });
