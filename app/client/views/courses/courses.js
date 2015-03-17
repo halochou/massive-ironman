@@ -217,8 +217,17 @@ Template.CoursesViewTable.events({
 });
 
 Template.CoursesViewTable.helpers({
-	"tableItems": function() {
-		return CoursesViewItems(this.courses);
+	"uniqCourseNames": function() {
+		coursesNames = _.uniq(this.courses.map(function(course){
+			return course.name;
+		}));
+		return _.map(coursesNames, function(name){
+			return {"_id":_.uniqueId("course_"), "name":name};
+		});
+	},
+	"tableItems": function(courseName) {
+		//console.log(this.courses.find({"name": courseName}));
+		return CoursesViewItems(Courses.find({"name": courseName}));
 	}
 });
 
