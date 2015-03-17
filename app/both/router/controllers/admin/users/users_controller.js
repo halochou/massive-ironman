@@ -3,7 +3,7 @@ this.AdminUsersController = RouteController.extend({
 
 	yieldTemplates: {
 		'AdminUsers': { to: 'AdminSubcontent'}
-		
+
 	},
 
 	onBeforeAction: function() {
@@ -17,7 +17,7 @@ this.AdminUsersController = RouteController.extend({
 	},
 
 	isReady: function() {
-		
+
 
 		var subs = [
 			Meteor.subscribe("admin_users")
@@ -31,11 +31,10 @@ this.AdminUsersController = RouteController.extend({
 	},
 
 	data: function() {
-		
 
 		return {
 			params: this.params || {},
-			admin_users: Users.find({}, {sort:{"profile.name":1}})
+			admin_users: Users.find({},{})
 		};
 		/*DATA_FUNCTION*/
 	},

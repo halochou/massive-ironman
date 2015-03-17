@@ -263,4 +263,13 @@ Template.AdminUsersViewTableItems.events({
 });
 
 Template.AdminUsersViewTableItems.helpers({
+	"username": function(_id){
+		var result;
+		Meteor.call("getUsername",_id, function(err,res){
+			console.log(res);
+			result = res;
+		});
+		console.log(result);
+		return result;
+	}
 });
