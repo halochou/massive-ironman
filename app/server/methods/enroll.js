@@ -37,7 +37,35 @@ Meteor.methods({
                 {_id: courseId},
                 {$pull: {members: username}}
             );
-            return "success"
+            return "success";
         }
-    }
+    },
+    'getProfileNameByUsername': function(usernameInput){
+        var user = Meteor.users.findOne({"username":usernameInput});
+        if (user){
+            return user.profile.name;
+        }
+        else{
+            return "user profile doesn't exist";
+        }
+    },
+    // 'getUsersNamelist': function(){
+    //     var usersNamelist = Meteor.users;
+    //     if (usersNamelist){
+    //         return usersNamelist;
+    //     }
+    //     else{
+    //         return "user profile doesn't exist";
+    //     }
+    // }
+    // ,
+    // 'getUsernameByID': function(IDInput){
+    //     var user = Meteor.users.findOne(IDInput);
+    //     if (user){
+    //         return user.username;
+    //     }
+    //     else{
+    //         return "user profile doesn't exist";
+    //     }
+    // }
 });

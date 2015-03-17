@@ -41,6 +41,7 @@ var AdminUsersViewItems = function(cursor) {
 		searchString = searchString.replace(".", "\\.");
 		var regEx = new RegExp(searchString, "i");
 		var searchFields = ["profile.name", "profile.email", "roles"];
+		// var searchFields = ["username", "profile.name", "roles"];
 		filtered = _.filter(raw, function(item) {
 			var match = false;
 			_.each(searchFields, function(field) {
