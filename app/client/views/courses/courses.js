@@ -324,7 +324,7 @@ Template.CoursesViewTableItems.helpers({
 	},
 	"status": function(courseId) {
 		var course = Courses.findOne({_id:courseId});
-		return _.contains(course.members, Meteor.user().profile.name);
+		return _.contains(course.members, Meteor.user().username);
 	},
 	"currentEnrolled": function(courseId) {
 		var course = Courses.findOne({_id:courseId});
