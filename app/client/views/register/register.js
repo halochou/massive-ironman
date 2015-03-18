@@ -47,7 +47,7 @@ Template.Register.events({
 		}
 
 		submit_button.button("loading");
-		Accounts.createUser({username: register_name, /*email: register_email,*/ password : register_password, profile: { name: register_realname, sn: register_name }}, function(err) {
+		Accounts.createUser({username: register_name, /*email: register_email,*/ password : register_password, profile: { name: register_realname }}, function(err) {
 			submit_button.button("reset");
 			if(err)
 				pageSession.set("errorMessage", err.message);

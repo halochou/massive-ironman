@@ -117,3 +117,38 @@ Template.AdminUsersInsertInsertForm.helpers({
 	}
 	
 });
+
+
+Template.AdminUsersBatchInsertForm.events({
+	"submit" : function(e, t) {
+		e.preventDefault();
+		var raw_data = t.find("#batch-data").value;
+		_.map(raw_data.split("\n"), function(line) {
+			var username = line.split(' ')[0];
+			var realname = line.split(' ')[1];
+			var password = line.split(' ')[2];
+			var values = {
+				username: username,
+				profile: {name: realname},
+				password: password
+			};
+			Meteor.call("createUserAccount", values);
+		});
+		Router.go("admin.users", {});
+		return false;
+	},
+	"click #form-cancel-button": function(e, t) {
+		e.preventDefault();
+		Router.go("admin.users", {});
+	},
+	"click #form-close-button": function(e, t) {
+		e.preventDefault();
+
+		/*CLOSE_REDIRECT*/
+	},
+	"click #form-back-button": function(e, t) {
+		e.preventDefault();
+
+		/*BACK_REDIRECT*/
+	}
+});

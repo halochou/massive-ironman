@@ -19,7 +19,10 @@ Meteor.methods({
 		if(options.username) userOptions.username = options.username;
 		if(options.email) userOptions.email = options.email;
 		if(options.password) userOptions.password = options.password;
-		if(options.profile) userOptions.profile = options.profile;
+		if(options.profile) {
+			userOptions.profile = options.profile;
+			userOptions.profile.sn = options.username;
+		};
 		if(options.profile && options.profile.email) userOptions.email = options.profile.email;
 
 		Accounts.createUser(userOptions);

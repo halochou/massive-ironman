@@ -21,7 +21,17 @@
 					</span>
 					新建用户
 				</button>
+
 			</div>
+
+			<div id="dataview-controls-insert" class="form-group">
+				<button type="submit" id="dataview-insert-button" class="btn btn-success">
+					<span class="fa fa-plus">
+					</span>
+					BATCH新建用户
+				</button>
+			</div>
+
 			<div id="dataview-controls-search">
 				{{#if isNotEmpty}}
 				<div id="dataview-controls-search-group" class="form-group">
@@ -95,6 +105,11 @@
 		</td>
 		<td>
 			<span id="edit-button" class="fa fa-pencil" title="Edit">编辑
+			</span>
+		</td>
+		<td>
+			<span id="delete-button" class="fa fa-trash-o" title="删除">
+			删除
 			</span>
 		</td>
 	</tr>
