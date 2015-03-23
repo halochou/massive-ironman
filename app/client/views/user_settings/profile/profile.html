@@ -26,9 +26,11 @@
 				{{infoMessage}}
 			</div>
 			{{/if}}
+
+			{{#if isAdminOrTutor}}
 			<div class="form-group  field-profile-name">
 				<label for="profile.name">
-					学号
+					姓名
 				</label>
 				<div class="input-div">
 					<input type="text" name="profile.name" value="{{current_user_data.profile.name}}" class="form-control" autofocus="autofocus" required="required">
@@ -37,7 +39,7 @@
 					<span id="error-text" class="help-block">
 					</span>
 				</div>
-			</div>
+			</div>			
 <!-- 			<div class="form-group  field-profile-email">
 	<label for="profile.email">
 		E-mail
@@ -50,18 +52,6 @@
 		</span>
 	</div>
 </div> -->
-			<div class="form-group  field-profile-realname">
-				<label for="profile.realname">
-					姓名
-				</label>
-				<div class="input-div">
-					<input type="text" name="profile.realname" value="{{current_user_data.profile.realname}}" class="form-control">
-					<span id="help-text" class="help-block">
-					</span>
-					<span id="error-text" class="help-block">
-					</span>
-				</div>
-			</div>
 			<div class="form-group">
 				<div class="submit-div">
 					<button id="form-submit-button" class="btn btn-success" type="submit">
@@ -71,6 +61,14 @@
 					</button>
 				</div>
 			</div>
+
+			{{else}}
+			<div class="form-group  field-name">
+				<label>
+					当前用户未被授权修改用户资料
+				</label>
+			</div>			
+			{{/if}}
 		</form>
 	</div>
 </template>

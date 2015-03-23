@@ -114,6 +114,9 @@ Template.UserSettingsProfileEditForm.helpers({
 	},
 	"errorMessage": function() {
 		return pageSession.get("userSettingsProfileEditFormErrorMessage");
-	}
-	
+	},
+	"isAdminOrTutor": function() {
+		var currentUser = Meteor.user();
+		return _.contains(currentUser.roles, 'tutor')||_.contains(currentUser.roles, 'admin');
+	}	
 });
